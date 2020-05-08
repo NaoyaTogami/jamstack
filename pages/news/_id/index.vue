@@ -2,11 +2,17 @@
     <div>
         <div>{{ item.title }}</div>
         <div v-html="item.content"></div>
-        <table>
-            <tr v-for="row in table" :key="row.th">
-                <th>{{ row.th }}</th>
-                <td>{{ row.td }}</td>
+        <table v-if="item.plan">
+          <thead>
+            <th>プラン</th>
+            <th>料金</th>
+          </thead>
+          <tbody>
+            <tr v-for="plan in item.plan" :key="plan.td1">
+              <td>{{ plan.td1 }}</td>
+              <td>{{ plan.td2 | addComma }}</td>
             </tr>
+          </tbody>
         </table>
         <v-btn to="/" nuxt>戻る</v-btn>
     </div>
@@ -16,8 +22,7 @@
 export default {
   data() {
     return {
-      item: {},
-      table:[]
+      item: {}
     }
   },
   async asyncData ({ app, params }) {
@@ -25,8 +30,12 @@ export default {
       headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
     })
     return {
-      item: response,
-      table: [response.tr1,response.tr2]
+      item: response
+    }
+  },
+  filters: {
+    addComma (value) {
+      return value.toLocaleString();
     }
   }
 }
