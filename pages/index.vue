@@ -77,7 +77,7 @@
       </v-card>
     </v-flex>
     <div v-for="item in items" :key="item.id">
-      <div>{{ item.title }}</div>
+      <nuxt-link :to="{name: 'news-id', params: {id: item.id}}">{{ item.title }}</nuxt-link>
       <div v-html="item.content"></div>
     </div>
   </v-layout>
