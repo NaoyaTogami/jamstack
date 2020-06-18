@@ -1,5 +1,5 @@
-import axios from 'axios'
 import colors from 'vuetify/es5/util/colors'
+const axios = require("axios"); 
 
 export default {
     mode: 'universal',
