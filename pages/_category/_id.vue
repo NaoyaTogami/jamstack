@@ -29,11 +29,6 @@ export default {
                 contents: payload.contents
             }
         }
-        else {
-            return {
-                contents: store.state.contents
-            }
-        }
     },
     data() {
         return {
