@@ -1,6 +1,18 @@
 <template>
     <v-container :style="style">
-        {{ post }}
+        <v-sheet tile :color="color.bg">
+            <v-row no-gutters>
+                <v-col cols="12">
+                    <v-card flat tile :color="color.title.bg">
+                        <v-card-title :class="`title px-2 ${color.title.txt}`">
+                            {{ post.title }}
+                        </v-card-title>
+                    </v-card>
+                </v-col>
+            </v-row>
+            
+            <Post :post="post.content" :color="color" />
+        </v-sheet>
     </v-container>
 </template>
 
