@@ -1,5 +1,4 @@
 import colors from 'vuetify/es5/util/colors'
-const axios = require("axios"); 
 
 export default {
     mode: 'universal',
@@ -132,8 +131,8 @@ export default {
         }
     },
     generate: {
-        routes() {
-            return axios.get('https://appo.microcms.io/api/v1/content', {
+        routes({$axios}) {
+            return $axios.get('https://appo.microcms.io/api/v1/content', {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
             .then(res=>{
