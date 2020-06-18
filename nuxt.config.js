@@ -137,7 +137,7 @@ export default {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
             .then(res=>{
-                return res.contents.map(x => {
+                return res.data.contents.map(x => {
                     return `/${x.menu.params}/${x.id}`
                 })
             })
