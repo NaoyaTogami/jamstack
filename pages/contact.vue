@@ -20,14 +20,17 @@
                     <v-text-field
                         v-model="name"
                         label="名前"
+                        name="name"
                     ></v-text-field>
                     <v-text-field
                         v-model="email"
                         label="メールアドレス"
+                        name="email"
                     ></v-text-field>
                     <v-textarea
                         v-model="content"
                         label="内容"
+                        name="content"
                         outlined
                     ></v-textarea>
                     <v-btn type="submit">送信</v-btn>
