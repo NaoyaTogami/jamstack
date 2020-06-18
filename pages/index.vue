@@ -5,6 +5,7 @@
             height="100vh"
         >
         </v-img>
+        {{ payload }}
         <v-container :style="style">
             <v-row>
                 <template v-for="content in homeContents">
@@ -56,7 +57,8 @@ export default {
     async asyncData ({ payload, store }) {
         if (payload) {
             return {
-                contents: payload.contents
+                payload: payload,
+                contents: store.state.contents
             }
         }
         else {
