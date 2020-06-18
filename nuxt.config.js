@@ -137,13 +137,7 @@ export default {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
             .then(res=>{
-                return res.contents.map(x => {
-                    return x.content.map(y=>{
-                        return `/${y.params}/${y.id}`
-                    })
-                    .flat()
-                })
-                .flat()
+                return [{route: '/event', payload: res}]
             })
             
     
