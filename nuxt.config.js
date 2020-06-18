@@ -138,12 +138,8 @@ export default {
             })
             .then(res=>{
                 return res.contents.map(x => {
-                    return x.content.map(y=>{
-                        return `/${y.params}/${y.id}`
-                    })
-                    .flat()
+                    return `/${x.menu.params}/${x.id}`
                 })
-                .flat()
             })
             
     
