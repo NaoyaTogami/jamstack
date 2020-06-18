@@ -1,6 +1,6 @@
 <template>
     <v-container :style="style">
-        {{ contents }}
+        {{ payload }}
         <v-sheet tile :color="color.bg" v-if="posts.layout=='s'">
             <v-row no-gutters>
                 <v-col cols="12">
@@ -56,11 +56,9 @@ export default {
         Tab
     },
     async asyncData ({ payload }) {
-        if (payload) {
             return {
-                contents: payload.contents
+                payload: payload
             }
-        }
     },
     data() {
         return {
