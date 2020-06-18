@@ -1,5 +1,6 @@
 <template>
     <v-container :style="style">
+        {{ contents }}
         <v-sheet tile :color="color.bg">
             <v-row no-gutters>
                 <v-col cols="12">
@@ -23,7 +24,7 @@ export default {
     components: {
         Post
     },
-    async asyncData ({ payload, store }) {
+    async asyncData ({ payload }) {
         if (payload) {
             return {
                 contents: payload.contents
