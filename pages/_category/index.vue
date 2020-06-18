@@ -55,10 +55,10 @@ export default {
         Tab
     },
     async asyncData ({ payload }) {
-            return {
-                menu: payload.menu,
-                contents: payload.contents
-            }
+        return {
+            menu: payload.menu,
+            contents: payload.contents
+        }
     },
     data() {
         return {

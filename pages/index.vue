@@ -7,41 +7,7 @@
         </v-img>
         {{ payload }}
         <v-container :style="style">
-            <v-row>
-                <template v-for="content in homeContents">
-                    <v-col
-                        :cols="content.xs"
-                        :sm="content.sm"
-                        :md="content.md"
-                    >
-                        <v-card :color="color.content.bg">
-                            <v-sheet tile :color="color.content.title.bg">
-                                <v-card-title
-                                    :class="`font-weight-black ${color.content.title.txt}`"
-                                >
-                                    {{ content.title }}
-                                </v-card-title>
-                            </v-sheet>
-                            
-                            <v-divider></v-divider>
-    
-                            <Change :posts="content" :color="color" /> 
-    
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                
-                                <v-btn
-                                    :to="`/${content.params}`"
-                                    nuxt
-                                    text
-                                >
-                                    もっと見る
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-col>
-                </template>
-            </v-row>
+            
         </v-container>
     </div>
 </template>
@@ -54,17 +20,10 @@ export default {
     components: {
         Change
     },
-    async asyncData ({ payload, store }) {
-        if (payload) {
-            return {
-                payload: payload,
-                contents: store.state.contents
-            }
-        }
-        else {
-            return {
-                contents: store.state.contents
-            }
+    async asyncData ({ payload }) {
+        return {
+            menu: payload.menu,
+            contents: payload.contents
         }
     },
     data() {
@@ -117,44 +76,6 @@ export default {
                 }
             })
             return contents
-        },
-        test () {
-            var contents = this.contents
-            var route = []
-            var routing = []
-            route = contents.map(a => {
-                routing = a.content.map(b=>{
-                    return {
-                        route: `/${b.params}/${b.id}`,
-                        payload: {
-                            contents: contents
-                        }
-                    }
-                })
-                .flat()
-                return [
-                    {
-                        route: `/${a.params}`,
-                        payload: {
-                            contents: contents
-                        }
-                    },
-                    ...routing
-                ]
-            })
-            .flat()
-            
-            route = [
-                {
-                    route: '/',
-                    payload: {
-                        contents: contents
-                    }
-                },
-                ...route
-            ]
-            
-            return route
         }
     }
 }
