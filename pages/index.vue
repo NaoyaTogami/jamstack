@@ -7,24 +7,55 @@
         </v-img>
         {{ payload }}
         <v-container :style="style">
-            
+            <v-row>
+                <template v-for="content in homeContents">
+                    <v-col
+                        :cols="content.xs"
+                        :sm="content.sm"
+                        :md="content.md"
+                    >
+                        <v-card :color="color.content.bg">
+                            <v-sheet tile :color="color.content.title.bg">
+                                <v-card-title
+                                    :class="`font-weight-black ${color.content.title.txt}`"
+                                >
+                                    {{ content.title }}
+                                </v-card-title>
+                            </v-sheet>
+                            
+                            <v-divider></v-divider>
+    
+                            <Change :posts="content" :color="color" /> 
+    
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                
+                                <v-btn
+                                    :to="`/${content.params}`"
+                                    nuxt
+                                    text
+                                >
+                                    もっと見る
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-col>
+                </template>
+            </v-row>
         </v-container>
     </div>
 </template>
 
 <script>
 import Change from '~/components/change.vue';
-
+import { mapGetters } from 'vuex'
 
 export default {
     components: {
         Change
     },
-    async asyncData ({ payload }) {
-        return {
-            menu: payload.menu,
-            contents: payload.contents
-        }
+    async fetch ({ store, params }) {
+        await store.dispatch('getApi');
     },
     data() {
         return {
@@ -51,6 +82,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['homeContents']),
         style () {
             if (this.$vuetify.breakpoint.mdAndUp) {
                 return 'margin-top:64px;margin-bottom:64px;'
@@ -58,24 +90,6 @@ export default {
             else {
                 return 'margin-top:56px;margin-bottom:56px;'
             }
-        },
-        homeContents () {
-            var contents = this.contents
-            contents = contents.filter(x => x.home)
-            contents = contents.map(x => {
-                return {
-                    title: x.title,
-                    params: x.params,
-                    layout: x.layout,
-                    listItems: x.listItems,
-                    xs: x.xs,
-                    sm: x.sm,
-                    md: x.md,
-                    tab: x.tab,
-                    content:x.content.filter((y,i) => i <= x.number-1)
-                }
-            })
-            return contents
         }
     }
 }
