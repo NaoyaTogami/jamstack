@@ -5,7 +5,7 @@
             height="100vh"
         >
         </v-img>
-        {{ test }}
+        {{ payload }}
         <v-container :style="style">
             <v-row>
                 <template v-for="content in homeContents">
@@ -117,15 +117,6 @@ export default {
                 }
             })
             return contents
-        },
-        test() {
-            return this.contents.map(x => {
-                    return x.content.map(y=>{
-                        return `/${y.params}/${y.id}`
-                    })
-                    .flat()
-                })
-                .flat()
         }
     }
 }
