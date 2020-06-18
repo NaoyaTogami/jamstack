@@ -1,6 +1,6 @@
 export const state = () => ({
     menu: {},
-    contents: {}
+    contents: []
 })
 
 export const mutations = {
@@ -20,21 +20,71 @@ export const actions = {
     
         commit('setMenu', menu.contents)
         
-        var homeContent = menu.contents.filter(x => x.home)
         var contents = []
         var data =[]
-        for (let x of homeContent) {
+        var posts = []
+        var post = {}
+        var items = []
+        var content = ''
+        var category = ''
+        var color = ''
+        
+        for (let x of menu.contents) {
             data = []
-            data = await this.$axios.$get(`https://appo.microcms.io/api/v1/content?limit=${x.number}?filters=menu[equals]${x.id}`, {
+            posts = []
+            data = await this.$axios.$get(`https://appo.microcms.io/api/v1/content?filters=menu[equals]${x.id}`, {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
+            posts = data.contents.map((y, i) => {
+                post = {}
+                items = y.content.map((z, j) => {
+                    content = z.content
+                    if (z.item === 'i') {
+                        content = content.slice(13, content.length - 10)
+                    }
+                    return {
+                        id: j,
+                        type: z.item,
+                        xs: (z.xs)? z.xs : 12,
+                        sm: (z.sm)? z.sm : 12,
+                        md: (z.md)? z.md : 12,
+                        content: content
+                    }
+                })
+                if(y.category) {
+                    category = y.category.name
+                    color = y.category.color
+                }
+                else {
+                    category = ''
+                    color = ''
+                }
+                post = {
+                    id: y.id,
+                    params: x.params,
+                    date: (y.date)? y.date : y.createdAt,
+                    title: y.title,
+                    overview: y.overview,
+                    category: category,
+                    color: category,
+                    content: items
+                }
+                return post
+            })
             contents = [...contents, {
-                params: x.layout.params,
-                contents: data.contents,
+                title: x.title,
+                params: x.params,
+                layout: x.layout,
+                headerNav: x.headerNav,
+                home: x.home,
+                footerNav: x.footerNav,
+                listItems: (x.listItems)? x.listItems : 0,
+                number: (x.number)? x.number : 3, 
                 xs: (x.xs)? x.xs : 12,
                 sm: (x.sm)? x.sm : 12,
                 md: (x.md)? x.md : 12,
-                listItems: x.listItems
+                tab: x.tab,
+                content: posts
             }]
         }
 
@@ -49,7 +99,22 @@ export const getters = {
     footerMenu (state) {
         return state.menu.filter(x => x.footerNav)
     },
-    homeContent (state) {
-        return state.menu.filter(x => x.home)
+    homeContents (state) {
+        var contents = state.contents
+        contents = contents.filter(x => x.home)
+        contents = contents.map(x => {
+            return {
+                title: x.title,
+                params: x.params,
+                layout: x.layout,
+                listItems: x.listItems,
+                xs: x.xs,
+                sm: x.sm,
+                md: x.md,
+                tab: x.tab,
+                content:x.content.filter((y,i) => i <= x.number-1)
+            }
+        })
+        return contents
     }
 }
