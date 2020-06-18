@@ -54,11 +54,22 @@ export default {
         Normal,
         Tab
     },
-    async asyncData ({ payload }) {
-        return {
-            menu: payload.menu,
-            contents: payload.contents
+    async asyncData ({ payload, store, params }) {
+        if(payload){
+            var test = {
+                menu: payload.menu,
+                contents: payload.contents
+            }
+            store.commit('setMenu', test.menu)
+            store.commit('setContents', test.contents)
+            return test
         }
+        else{
+            return {
+                menu: store.state.menu,
+                contents: store.state.contents
+            }
+        } 
     },
     data() {
         return {
