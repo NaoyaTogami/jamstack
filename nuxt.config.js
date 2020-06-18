@@ -212,14 +212,14 @@ export default {
                     routing = a.content.map(b=>{
                         return {
                             route: `/${b.params}/${b.id}`,
-                            payload: 'test'
+                            payload: contents
                         }
                     })
                     .flat()
                     return [
                         {
                             route: `/${a.params}`,
-                            payload: 'test'
+                            payload: contents
                         },
                         ...routing
                     ]
@@ -229,7 +229,7 @@ export default {
                 route = [
                     {
                         route: '/',
-                        payload: 'test'
+                        payload: contents
                     },
                     ...route
                 ]
