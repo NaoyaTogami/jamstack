@@ -208,7 +208,7 @@ export default {
                 
                 var route = []
                 var routing = []
-                route = contents.map(x => {
+                route = contents.content.map(x => {
                     routing = x.content.map(y=>{
                         return {
                             route: `/${y.params}/${y.id}`,
