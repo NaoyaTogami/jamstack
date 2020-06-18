@@ -47,12 +47,23 @@
 
 <script>
 import Change from '~/components/change.vue';
-import { mapGetters } from 'vuex'
 
 
 export default {
     components: {
         Change
+    },
+    async asyncData ({ payload, store }) {
+        if (payload) {
+            return {
+                contents: payload.contents
+            }
+        }
+        else {
+            return {
+                contents: store.state.contents
+            }
+        }
     },
     data() {
         return {
@@ -79,7 +90,6 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['homeContents']),
         style () {
             if (this.$vuetify.breakpoint.mdAndUp) {
                 return 'margin-top:64px;margin-bottom:64px;'
@@ -87,6 +97,24 @@ export default {
             else {
                 return 'margin-top:56px;margin-bottom:56px;'
             }
+        },
+        homeContents () {
+            var contents = this.contents
+            contents = contents.filter(x => x.home)
+            contents = contents.map(x => {
+                return {
+                    title: x.title,
+                    params: x.params,
+                    layout: x.layout,
+                    listItems: x.listItems,
+                    xs: x.xs,
+                    sm: x.sm,
+                    md: x.md,
+                    tab: x.tab,
+                    content:x.content.filter((y,i) => i <= x.number-1)
+                }
+            })
+            return contents
         }
     }
 }

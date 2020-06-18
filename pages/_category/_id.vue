@@ -5,13 +5,13 @@
                 <v-col cols="12">
                     <v-card flat tile :color="color.title.bg">
                         <v-card-title :class="`title px-2 ${color.title.txt}`">
-                            {{ originalPost.title }}
+                            {{ post.title }}
                         </v-card-title>
                     </v-card>
                 </v-col>
             </v-row>
             
-            <Post :post="post" :color="color" />
+            <Post :post="post.content" :color="color" />
         </v-sheet>
     </v-container>
 </template>
@@ -22,6 +22,18 @@ import Post from '~/components/post.vue';
 export default {
     components: {
         Post
+    },
+    async asyncData ({ payload, store }) {
+        if (payload) {
+            return {
+                contents: payload.contents
+            }
+        }
+        else {
+            return {
+                contents: store.state.contents
+            }
+        }
     },
     data() {
         return {
@@ -35,40 +47,19 @@ export default {
             }
         }
     },
-    async asyncData ({ app, params }) {
-        var originalPost = await app.$axios.$get(`https://appo.microcms.io/api/v1/content/${params.id}`, {
-            headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
-        })
-        return {
-            originalPost: originalPost,
-        }
-    },
     computed: {
         post () {
-            var res = []
-            this.originalPost.content.filter((x, i) => {
-                if (x.item === 'i') {
-                    res = [...res, {
-                        id: i,
-                        type: x.item,
-                        xs: (x.xs)? x.xs : 12,
-                        sm: (x.sm)? x.sm : 12,
-                        md: (x.md)? x.md : 12,
-                        content: x.content.slice(13, x.content.length - 10)
-                    }]  
-                }
-                else {
-                    res = [...res, {
-                        id: i,
-                        type: x.item,
-                        xs: (x.xs)? x.xs : 12,
-                        sm: (x.sm)? x.sm : 12,
-                        md: (x.md)? x.md : 12,
-                        content: x.content
-                    }]
-                }
+            var routing =  this.contents.map(x => {
+                return x.content.map(y=>{
+                    if (y.params == this.$route.params.category && y.id == this.$route.params.id) {
+                        return y
+                    }
+                })
+                .flat()
             })
-            return res
+            .flat()
+            routing =  routing.filter(x => x).flat()
+            return routing[0]
         },
         style () {
             if (this.$vuetify.breakpoint.mdAndUp) {

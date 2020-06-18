@@ -47,13 +47,24 @@
 import Post from '~/components/post.vue';
 import Normal from '~/components/normal.vue';
 import Tab from '~/components/tab.vue';
-import { mapState } from 'vuex'
 
 export default {
     components: {
         Post,
         Normal,
         Tab
+    },
+    async asyncData ({ payload, store }) {
+        if (payload) {
+            return {
+                contents: payload.contents
+            }
+        }
+        else {
+            return {
+                contents: store.state.contents
+            }
+        }
     },
     data() {
         return {
@@ -75,7 +86,6 @@ export default {
         }
     },
     computed: {
-        ...mapState(['contents']),
         posts () {
             var posts = this.contents.filter(x => x.params == this.$route.params.category)
             return posts[0]

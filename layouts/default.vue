@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     data () {
@@ -138,7 +138,13 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['headerMenu', 'footerMenu'])
+        ...mapState(['menu']),
+        headerMenu () {
+            return this.menu.filter(x => x.headerNav)
+        },
+        footerMenu () {
+            return this.menu.filter(x => x.footerNav)
+        }
     },
     methods: {
         onScroll (e) {
