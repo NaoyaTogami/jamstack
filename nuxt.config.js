@@ -135,8 +135,20 @@ export default {
             const data = await axios.get('https://appo.microcms.io/api/v1/content', {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
+            var route = []
+            var routing = []
+            
+            route = data.contents.map(x => {
+                routing = x.content.map(y=>{
+                    return `/${y.params}/${y.id}`
+                })
+                .flat()
+                return [`/${x.params}`, ...routing]
+            })
+            .flat()
+            
             return {
-                payload: data
+                route: route
             }
     
         }
