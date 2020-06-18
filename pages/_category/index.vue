@@ -1,46 +1,6 @@
 <template>
     <v-container :style="style">
-        {{ payload }}
-        <v-sheet tile :color="color.bg" v-if="posts.layout=='s'">
-            <v-row no-gutters>
-                <v-col cols="12">
-                    <v-card flat tile :color="color.title.bg">
-                        <v-card-title :class="`title px-2 ${color.title.txt}`">
-                            {{ posts.content[0].title }}
-                        </v-card-title>
-                    </v-card>
-                </v-col>
-            </v-row>
-            <Post :post="posts.content[0].content" :color="color" />
-        </v-sheet>
-        <v-sheet tile :color="color.bg" v-else>
-            <v-row no-gutters>
-                <v-col cols="12">
-                    <v-card
-                        flat
-                        tile
-                        :color="color.title.bg"
-                    >
-                        <v-card-title
-                            :class="`title px-2 ${color.title.txt}`"
-                        >
-                            {{ posts.title }}
-                        </v-card-title>
-                    </v-card>
-                </v-col>
-            </v-row>
-    
-            <v-row no-gutters>
-                <v-col cols="12">
-                    <component
-                        :is="(posts.tab)? 'Tab' : 'Normal'"
-                        :postsGroups="(posts.tab)? tab : normal"
-                        :color="color"
-                    >
-                    </component>
-                </v-col>
-            </v-row>
-        </v-sheet>
+        {{ posts }}
     </v-container>
 </template>
 
@@ -57,7 +17,8 @@ export default {
     },
     async asyncData ({ payload }) {
             return {
-                payload: payload
+                menu: payload.menu,
+                contents: payload.contents
             }
     },
     data() {

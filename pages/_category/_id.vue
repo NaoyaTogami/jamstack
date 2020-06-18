@@ -23,7 +23,7 @@ export default {
     components: {
         Post
     },
-    async asyncData ({ payload, store }) {
+    async asyncData ({ payload }) {
         return {
             menu: payload.menu,
             contents: payload.contents
