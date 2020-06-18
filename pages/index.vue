@@ -117,6 +117,44 @@ export default {
                 }
             })
             return contents
+        },
+        test () {
+            var contents = this.contents
+            var route = []
+            var routing = []
+            route = contents.map(a => {
+                routing = a.content.map(b=>{
+                    return {
+                        route: `/${b.params}/${b.id}`,
+                        payload: {
+                            contents: contents
+                        }
+                    }
+                })
+                .flat()
+                return [
+                    {
+                        route: `/${a.params}`,
+                        payload: {
+                            contents: contents
+                        }
+                    },
+                    ...routing
+                ]
+            })
+            .flat()
+            
+            route = [
+                {
+                    route: '/',
+                    payload: {
+                        contents: contents
+                    }
+                },
+                ...route
+            ]
+            
+            return route
         }
     }
 }
