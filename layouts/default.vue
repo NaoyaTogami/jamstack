@@ -10,6 +10,7 @@
                     text
                     @click="$router.push('/')"
                     class="px-0"
+                    aria-label="to-home"
                     nuxt
                     exact
                 >
