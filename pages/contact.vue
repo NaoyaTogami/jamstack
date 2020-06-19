@@ -11,12 +11,8 @@
                         </v-card>
                     </v-col>
                 </v-row>
-                <v-form name="contact" method="POST" netlify>
-                    <v-text-field
-                        v-show="false"
-                        name="form-name"
-                        value="contact"
-                    />
+                <v-form name="contact" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="contact">
                     <v-text-field
                         v-model="name"
                         label="名前"
