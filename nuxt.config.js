@@ -242,7 +242,10 @@ export default {
                     },
                     {
                         route: '/contact',
-                        payload: ''
+                        payload: {
+                            contents: contents,
+                            menu: menu
+                        }
                     },
                     ...route
                 ]
