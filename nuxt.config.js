@@ -3,6 +3,7 @@ const axios = require("axios");
 
 export default {
     mode: 'universal',
+    dev: process.env.NODE_ENV !== 'production',
     /*
     ** Headers of the page
     */
@@ -26,7 +27,7 @@ export default {
     ** Global CSS
     */
     css: [
-        '@mdi/font/css/materialdesignicons.css'
+        '~~/font/dist/css/materialdesignicons.css'
     ],
     /*
     ** Plugins to load before mounting the App
@@ -48,6 +49,7 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
         ['@nuxtjs/moment', ['ja']],
+        '~/modules/generator',
     ],
     /*
     ** Axios module configuration
