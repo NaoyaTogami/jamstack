@@ -6,8 +6,7 @@
             alt=""
         >
         </v-img>
-        {{ menu }}
-        {{ contents }}
+        {{ payload }}
         <v-container :style="style">
             <v-row>
                 <template v-for="content in homeContents">
@@ -57,16 +56,9 @@ export default {
     components: {
         Change
     },
-    async asyncData({ $axios, store }) {
-        const url = process.env.NODE_ENV === 'development' ? '' : 'https://festive-mahavira-a47ac7.netlify.app'
-        var data = await $axios.$get(`${url}/_nuxt/api/datas.json`)
-            store.commit('setMenu', data.menu)
-            store.commit('setContents', data.contents)
-            return {
-                menu: data.menu,
-                contents: data.contents
-            }
-      },
+    async fetch ({ store, params }) {
+        await store.dispatch('getApi');
+    },
     data() {
         return {
             news: [],
