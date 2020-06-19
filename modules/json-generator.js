@@ -3,7 +3,7 @@ import axios from 'axios'
 module.exports = function generateModule(moduleOptions) {
   this.nuxt.hook('build:before', async ({ app }) => {
 
-    var res = await app.axios.get('https://appo.microcms.io/api/v1/content', {
+    var res = await axios.get('https://appo.microcms.io/api/v1/content', {
         headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
     })
     
