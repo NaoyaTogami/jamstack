@@ -11,7 +11,7 @@
                         </v-card>
                     </v-col>
                 </v-row>
-                <v-form name="contact" method="POST" data-netlify="true">
+                <v-form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="contact">
                     <v-text-field
                         v-model="name"
@@ -29,6 +29,12 @@
                         name="content"
                         outlined
                     ></v-textarea>
+                    <v-text-field
+                        v-model="botField"
+                        label="人間は入力しないでください"
+                        name="bot-field"
+                        v-show="false"
+                    />
                     <v-btn type="submit">送信</v-btn>
                 </v-form>
             </v-sheet>
@@ -63,7 +69,8 @@ export default {
             },
             name: '',
             email: '',
-            content: '' 
+            content: '' ,
+            botField: ''
         }
     },
     computed: {

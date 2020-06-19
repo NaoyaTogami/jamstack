@@ -13,7 +13,7 @@
                     nuxt
                     exact
                 >
-                    <img src="~assets/logo.svg" width="56px" height="56px">
+                    <img src="~assets/logo.svg" width="56px" height="56px" alt="">
                   
                     <v-toolbar-title
                         :class="`d-none d-md-flex ${color.header.txt}`"
@@ -102,6 +102,7 @@
                             to="/"
                             :color="color.footer.bg"
                             :class="`${color.footer.txt}`"
+                            :aria-label="icon"
                             icon
                             large
                         >
