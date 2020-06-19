@@ -1,8 +1,9 @@
 <template>
     <div>
         <v-img
-            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/IMG_20200616_124224.jpg"
+            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/background.jpg"
             height="100vh"
+            alt=""
         >
         </v-img>
         {{ payload }}

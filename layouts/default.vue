@@ -99,6 +99,7 @@
                         class="px-2"
                     >
                         <v-btn
+                            to="/"
                             :color="color.footer.bg"
                             :class="`${color.footer.txt}`"
                             icon
