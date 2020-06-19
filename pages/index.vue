@@ -7,6 +7,7 @@
         >
         </v-img>
         {{ menu }}
+        {{ contents }}
         <v-container :style="style">
             <v-row>
                 <template v-for="content in homeContents">

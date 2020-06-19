@@ -49,7 +49,7 @@ export default {
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
         ['@nuxtjs/moment', ['ja']],
-        '~/modules/generator',
+        '~/modules/json-generator',
     ],
     /*
     ** Axios module configuration
