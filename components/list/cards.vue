@@ -8,7 +8,7 @@
             md="4"
         >
             <v-card
-                :to="(post.content == '') ? undefined : `/${post.params}/${post.id}`"
+                :to="(post.content == '') ? undefined : `/${post.params}/${post.id}/`"
                 :color="color.post.bg"
                 nuxt
             >

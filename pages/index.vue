@@ -31,7 +31,7 @@
                                 <v-spacer></v-spacer>
                                 
                                 <v-btn
-                                    :to="`/${content.params}`"
+                                    :to="`/${content.params}/`"
                                     nuxt
                                     text
                                 >

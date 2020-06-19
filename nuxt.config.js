@@ -240,6 +240,10 @@ export default {
                             menu: menu
                         }
                     },
+                    {
+                        route: '/contact',
+                        payload: ''
+                    },
                     ...route
                 ]
                 

@@ -5,7 +5,7 @@
                 <v-list-item
                     :key="post.id"
                     two-line
-                    @click="$router.push(`/${post.params}/${post.id}`)"
+                    @click="$router.push(`/${post.params}/${post.id}/`)"
                     :disabled="post.content==''"
                 >
                     <v-list-item-content>

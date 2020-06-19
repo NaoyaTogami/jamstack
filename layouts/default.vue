@@ -29,7 +29,7 @@
                 <v-btn
                     v-for="menu in headerMenu"
                     :key="menu.id"
-                    :to="`/${menu.params}`"
+                    :to="`/${menu.params}/`"
                     color="transparent"
                     :class="`d-none d-sm-flex ${color.header.txt}`"
                     nuxt
@@ -79,7 +79,7 @@
                     >
                         <v-btn
                             
-                            :to="`/${menu.params}`"
+                            :to="`/${menu.params}/`"
                             :color="color.footer.bg"
                             :class="`${color.footer.txt}`"
                             text
