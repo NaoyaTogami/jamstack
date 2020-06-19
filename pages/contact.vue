@@ -14,8 +14,8 @@
                 <v-form name="contact" method="POST" netlify>
                     <v-text-field
                         v-show="false"
-                        v-model="title"
                         name="form-name"
+                        value="contact"
                     />
                     <v-text-field
                         v-model="name"
@@ -65,7 +65,6 @@ export default {
                 bg:'postBg',
                 title: {bg: 'postTitleBg', txt: 'postTitleTxt--text'},
             },
-            title: 'contact',
             name: '',
             email: '',
             content: '' 
