@@ -1,7 +1,7 @@
 module.exports = function generateModule(moduleOptions) {
   this.nuxt.hook('build:before', async ({ app }) => {
 
-    var data = await app.$axios.$get('https://appo.microcms.io/api/v1/content', {
+    var res = await app.axios.get('https://appo.microcms.io/api/v1/content', {
         headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
     })
     
@@ -15,7 +15,7 @@ module.exports = function generateModule(moduleOptions) {
     var color = ''
     var filterdPosts = []
     
-    posts = data.contents.map((y, i) => {
+    posts = res.data.contents.map((y, i) => {
         post = {}
         items = y.content.map((z, j) => {
             content = z.content
