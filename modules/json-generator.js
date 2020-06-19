@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 module.exports = function generateModule(moduleOptions) {
   this.nuxt.hook('build:before', async ({ app }) => {
 
