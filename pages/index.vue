@@ -33,6 +33,7 @@
                                 
                                 <v-btn
                                     :to="`/${content.params}/`"
+                                    :class="`${color.content.txt}`"
                                     nuxt
                                     text
                                 >
@@ -65,7 +66,7 @@ export default {
             color: {
                 content: {
                     bg: 'homeContentBg',
-                    txt: 'homeContentTxt',
+                    txt: 'homeContentTxt--text',
                     title: {bg: 'homeContentTitleBg', txt: 'homeContentTitleTxt--text'}
                 },
                 post: {

@@ -100,7 +100,7 @@ export default {
                     homePostTxt: colors.teal.lighten1,
                     homePostTitleBg: '#ffffff',
                     homePostTitleTxt: colors.grey.darken3,
-                    homePostSubTxt: colors.amber.darken3,
+                    homePostSubTxt: colors.grey.darken3,
                     homeItemBg: colors.deepOrange.accent4,
                     homeItemTitleBg: colors.green.accent3,
                     homeItemTitleTxt: colors.blue.darken2,
