@@ -59,7 +59,7 @@ export const actions = {
                 title: y.title,
                 overview: y.overview,
                 category: category,
-                color: category,
+                color: color,
                 content: items
             }
             menu = [...menu, y.menu]

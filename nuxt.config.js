@@ -93,12 +93,12 @@ export default {
                     tabTxt: colors.teal.lighten1,
                     homeBg: colors.amber.base,
                     homeContentBg: colors.grey.darken3,
-                    homeContentTxt: colors.amber.darken3,
+                    homeContentTxt: '#ffffff',
                     homeContentTitleBg: colors.blue.darken2,
                     homeContentTitleTxt: '#ffffff',
                     homePostBg: colors.green.accent3,
                     homePostTxt: colors.teal.lighten1,
-                    homePostTitleBg: colors.deepOrange.accent4,
+                    homePostTitleBg: '#ffffff',
                     homePostTitleTxt: colors.grey.darken3,
                     homePostSubTxt: colors.amber.darken3,
                     homeItemBg: colors.deepOrange.accent4,
@@ -182,7 +182,7 @@ export default {
                         title: y.title,
                         overview: y.overview,
                         category: category,
-                        color: category,
+                        color: color,
                         content: items
                     }
                     menu = [...menu, y.menu]
