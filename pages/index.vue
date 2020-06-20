@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-img
-            :src="bgImg"
+            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/background.jpg"
             height="100vh"
             alt=""
         >
