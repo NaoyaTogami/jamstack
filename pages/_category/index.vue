@@ -1,6 +1,6 @@
 <template>
     <v-container :style="style">
-        <v-sheet tile :color="color.bg" v-if="posts.layout=='s'">
+        <v-sheet tile :color="color.bg" v-if="posts.menu.layout=='s'">
             <v-row no-gutters>
                 <v-col cols="12">
                     <v-card flat tile :color="color.title.bg">
@@ -23,7 +23,7 @@
                         <v-card-title
                             :class="`title px-2 ${color.title.txt}`"
                         >
-                            {{ posts.title }}
+                            {{ posts.menu.title }}
                         </v-card-title>
                     </v-card>
                 </v-col>
@@ -54,21 +54,25 @@ export default {
         Normal,
         Tab
     },
-    async asyncData ({ payload, store }) {
+    async asyncData ({ app, payload, store, params }) {
         if(payload){
-            var res = {
-                menu: payload.menu,
-                contents: payload.contents
-            }
-            store.commit('setMenu', res.menu)
-            store.commit('setContents', res.contents)
-            return res
+            console.log(payload)
+            store.commit('setMenu', payload.menu)
+            return {posts: payload.contents}
         }
         else{
-            await store.dispatch('getContents')
+            var menu = await app.$axios.$get(`https://appo.microcms.io/api/v1/menu?filters=params[equals]${params.category}`, {
+                headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
+            })
+            menu = menu.contents[0]
+            let posts = await app.$axios.$get(`https://appo.microcms.io/api/v1/content?filters=menu[equals]${menu.id}`, {
+                headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
+            })
             return {
-                menu: store.state.menu,
-                contents: store.state.contents
+                posts: {
+                    menu: menu,
+                    content: posts.contents
+                }
             }
         } 
     },
@@ -92,43 +96,26 @@ export default {
         }
     },
     computed: {
-        posts () {
-            var posts = this.contents.filter(x => x.params == this.$route.params.category)
-            return posts[0]
-        },
         categories () {
             var categories = this.posts.content.map(x => x.category)
             categories = [...new Set(categories)]
             return categories
         },
         normal () {
-            return {
-                layout: this.posts.layout,
-                listItems: this.posts.listItems,
-                content: this.posts.content,
-                categories: this.categories
-            }
+            var posts = this.posts
+            posts.categories = this.categories
+            return posts
         },
         tab () {
-            var postsGroups = []
             var postsGroup = {}
             var posts = this.posts
-            var categories = this.categories
             
-            postsGroups = categories.map((x, i) => {
-                postsGroup = {
-                    layout: posts.layout,
-                    listItems: posts.listItems,
-                    content: posts.content.filter(y => y.category == x)
-                }
-                return {
-                    id: i,
-                    category: x,
-                    content: postsGroup
-                }
+            return this.categories.map(x => {
+                postsGroup = posts
+                postsGroup.content = posts.content.filter(y => y.category.name == x.name)
+                postsGroup.category = x
+                return postsGroup
             })
-            
-            return postsGroups
         },
         style () {
             if (this.$vuetify.breakpoint.mdAndUp) {

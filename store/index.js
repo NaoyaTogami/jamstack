@@ -21,53 +21,16 @@ export const actions = {
         var contents = []
         var menu = []
         var posts = []
-        var post = {}
-        var items = []
-        var content = ''
-        var category = ''
-        var color = ''
-        var tagName = ''
-        var tagParams = ''
-        var filterdPosts = []
         
-        posts = data.contents.map((y, i) => {
-            post = {}
-            items = y.content.map((z, j) => {
-                if (z.item === 'i') {
+        posts = data.contents.map(y => {
+            y.content = y.content.map(z => {
+                if (z.type === 'i') {
                     z.content = z.content.slice(13, z.content.length - 10)
                 }
                 return z
             })
-            if(y.category) {
-                category = y.category.name
-                color = y.category.color
-            }
-            else {
-                category = ''
-                color = ''
-            }
-            if(y.tag) {
-                tagName = y.tag.name,
-                tagParams = y.tag.params
-            }
-            else {
-                tagName = ''
-                tagParams = ''
-            }
-            post = {
-                id: y.id,
-                params: y.menu.params,
-                date: (y.date)? y.date : y.createdAt,
-                title: y.title,
-                overview: y.overview,
-                category: category,
-                tagName: tagName,
-                tagParams: tagParams,
-                color: color,
-                content: items
-            }
             menu = [...menu, y.menu]
-            return post
+            return y
         })
         
         menu = [...new Set(menu)]
@@ -79,27 +42,14 @@ export const actions = {
         commit('setMenu', menu)
         
         contents = menu.map(p => {
-            filterdPosts = posts.filter(q => q.params == p.params)
             return {
-                title: p.title,
-                params: p.params,
-                layout: p.layout,
-                headerNav: p.headerNav,
-                home: p.home,
-                footerNav: p.footerNav,
-                listItems: (p.listItems)? p.listItems : 0,
-                number: (p.number)? p.number : 3, 
-                xs: (p.xs)? p.xs : 12,
-                sm: (p.sm)? p.sm : 12,
-                md: (p.md)? p.md : 12,
-                tab: p.tab,
-                original: p.original,
-                content: filterdPosts
+                menu: p,
+                content: posts.filter(q => q.menu.params == p.params)
             }
         })
         
-        contents = contents.filter(m => !m.original)
-
+        contents = contents.filter(m => !m.menu.original)
+        
         commit('setContents', contents)
     }
 }
@@ -110,23 +60,5 @@ export const getters = {
     },
     footerMenu (state) {
         return state.menu.filter(x => x.footerNav)
-    },
-    homeContents (state) {
-        var contents = state.contents
-        contents = contents.filter(x => x.home)
-        contents = contents.map(x => {
-            return {
-                title: x.title,
-                params: x.params,
-                layout: x.layout,
-                listItems: x.listItems,
-                xs: x.xs,
-                sm: x.sm,
-                md: x.md,
-                tab: x.tab,
-                content:x.content.filter((y,i) => i <= x.number-1)
-            }
-        })
-        return contents
     }
 }

@@ -52,20 +52,9 @@
 export default {
     async asyncData ({ payload, store, params }) {
         if(payload){
-            var test = {
-                menu: payload.menu,
-                contents: payload.contents
-            }
-            store.commit('setMenu', test.menu)
-            store.commit('setContents', test.contents)
-            return test
+            console.log(payload)
+            store.commit('setMenu', payload.menu)
         }
-        else{
-            return {
-                menu: store.state.menu,
-                contents: store.state.contents
-            }
-        } 
     },
     data() {
         return {

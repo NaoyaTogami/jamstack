@@ -17,7 +17,7 @@ export default {
     },
     computed: {
         component () {
-            switch (this.posts.layout) {
+            switch (this.posts.menu.layout) {
                 case 'b':
                     return 'Boxes';
                     break;

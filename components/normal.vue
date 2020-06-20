@@ -38,7 +38,7 @@ export default {
             var selected = this.selected
             
             if(selected != ''){
-                posts.content = posts.content.filter(x => selected.includes(x.category))
+                posts.content = posts.content.filter(x => selected.includes(x.category.name))
             }
             
             return posts

@@ -8,14 +8,14 @@
             md="4"
         >
             <v-card
-                :to="(post.content == '') ? undefined : `/${post.params}/${post.id}/`"
+                :to="(post.content == '') ? undefined : `/${posts.menu.params}/${post.id}/`"
                 :color="color.post.bg"
                 nuxt
             >
                 <v-sheet tile :color="color.post.title.bg">
                     <v-card-title :class="`${color.post.title.txt}`">{{ post.title }}</v-card-title>
                     <v-card-subtitle
-                        v-if="posts.listItems <= 1"
+                        v-if="posts.menu.listItems <= 1"
                         :class="`${color.post.sub.txt}`"
                     >
                         {{ post.date | format-date }}
@@ -31,17 +31,17 @@
                     {{ post.overview }}
                 </v-card-text>
                 
-                <v-card-actions v-if="posts.listItems == 0 || posts.listItems == 2">
+                <v-card-actions v-if="posts.menu.listItems == 0 || posts.menu.listItems == 2">
                     <v-spacer></v-spacer>
                     <v-chip
                         v-if="post.category"
                         :small="!$vuetify.breakpoint.xs"
                         :x-small="$vuetify.breakpoint.xs"
-                        :color="post.color"
+                        :color="post.category.color"
                         text-color="white"
                         class="mb-2 mr-2"
                     >
-                        {{ post.category }}
+                        {{ post.category.name }}
                     </v-chip>
                 </v-card-actions>
             </v-card>

@@ -16,7 +16,7 @@
                         
                         <v-spacer></v-spacer>
                         
-                        <v-col cols="auto" v-if="posts.listItems <= 1" class="align-self-center">
+                        <v-col cols="auto" v-if="posts.menu.listItems <= 1" class="align-self-center">
                             <div :class="`mx-4 caption ${color.post.sub.txt}`">{{ post.date | format-date }}</div>
                         </v-col>
                     </v-row>
@@ -29,17 +29,17 @@
                 
                 <Post :post="post.content" :color="color" />
                 
-                <v-row v-if="posts.listItems == 0 || posts.listItems == 2" class="px-4 pb-4" no-gutters>
+                <v-row v-if="posts.menu.listItems == 0 || posts.menu.listItems == 2" class="px-4 pb-4" no-gutters>
                     <v-spacer></v-spacer>
                     <v-col cols="auto">
                         <v-chip
                             v-if="post.category"
                             :small="!$vuetify.breakpoint.xs"
                             :x-small="$vuetify.breakpoint.xs"
-                            :color="post.color"
+                            :color="post.category.color"
                             text-color="white"
                         >
-                            {{ post.category }}
+                            {{ post.category.name }}
                         </v-chip>
                     </v-col>
                 </v-row>

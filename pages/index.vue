@@ -8,30 +8,30 @@
         </v-img>
         <v-container :style="style">
             <v-row>
-                <template v-for="content in homeContents">
+                <template v-for="posts in homeContents">
                     <v-col
-                        :cols="content.xs"
-                        :sm="content.sm"
-                        :md="content.md"
+                        :cols="(posts.menu.xs)? posts.menu.xs : 12"
+                        :sm="(posts.menu.sm)? posts.menu.sm : 12"
+                        :md="(posts.menu.md)? posts.menu.md : 12"
                     >
                         <v-card :color="color.content.bg">
                             <v-sheet tile :color="color.content.title.bg">
                                 <v-card-title
                                     :class="`font-weight-black ${color.content.title.txt}`"
                                 >
-                                    {{ content.title }}
+                                    {{ posts.menu.title }}
                                 </v-card-title>
                             </v-sheet>
                             
                             <v-divider></v-divider>
     
-                            <Change :posts="content" :color="color" /> 
+                            <Change :posts="posts" :color="color" /> 
     
                             <v-card-actions>
                                 <v-spacer></v-spacer>
                                 
                                 <v-btn
-                                    :to="`/${content.params}/`"
+                                    :to="`/${posts.menu.params}/`"
                                     :class="`${color.content.txt}`"
                                     nuxt
                                     text
@@ -49,7 +49,7 @@
 
 <script>
 import Change from '~/components/change.vue';
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     components: {
@@ -57,20 +57,12 @@ export default {
     },
     async asyncData ({ payload, store }) {
         if(payload){
-            var res = {
-                menu: payload.menu,
-                contents: payload.contents
-            }
-            store.commit('setMenu', res.menu)
-            store.commit('setContents', res.contents)
-            return res
+            console.log(payload)
+            store.commit('setMenu', payload.menu)
+            return {contents: payload.contents}
         }
         else{
             await store.dispatch('getContents')
-            return {
-                menu: store.state.menu,
-                contents: store.state.contents
-            }
         } 
     },
     data() {
@@ -99,7 +91,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['homeContents']),
+        ...mapState(['contents']),
         style () {
             if (this.$vuetify.breakpoint.mdAndUp) {
                 return 'margin-top:64px;margin-bottom:64px;'
@@ -107,6 +99,13 @@ export default {
             else {
                 return 'margin-top:56px;margin-bottom:56px;'
             }
+        },
+        homeContents () {
+            var contents = this.contents
+            var posts = {}
+            var res = {}
+            contents = contents.filter(x => x.menu.home)
+            return contents
         }
     }
 }

@@ -9,15 +9,15 @@
         >
             <v-tab
                 v-for="postsGroup in postsGroups"
-                :key="postsGroup.id"
+                :key="postsGroup.category.id"
             >
-                {{ postsGroup.category }}
+                {{ postsGroup.category.name }}
             </v-tab>
         </v-tabs>
         <v-tabs-items v-model="tab">
             <v-tab-item
                 v-for="postsGroup in postsGroups"
-                :key="postsGroup.id"
+                :key="postsGroup.category.id"
             >
                 <v-card tile flat :color="color.bg">
                     <Change :posts="postsGroup.content" :color="color" />

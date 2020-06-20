@@ -1,5 +1,5 @@
 <template>
-    <v-expansion-panels tile flat :color="color">
+    <v-expansion-panels tile flat :color="color.post.bg">
         <v-expansion-panel
             v-for="post in posts.content"
             :key="post.id"
@@ -11,19 +11,19 @@
                         <v-col cols="11" class="pa-0">
                             <v-list-item two-line class="pl-0 pr-sm-0">
                             <v-list-item-content>
-                                <v-list-item-subtitle v-if="posts.listItems <= 1" :class="`${color.post.sub.txt}`">{{ post.date | format-date }}</v-list-item-subtitle>
+                                <v-list-item-subtitle v-if="posts.menu.listItems <= 1" :class="`${color.post.sub.txt}`">{{ post.date | format-date }}</v-list-item-subtitle>
                                 <v-list-item-title :class="`${color.post.title.txt} font-weight-bold`">{{ post.title }}</v-list-item-title>
                             </v-list-item-content>
                         
-                            <v-list-item-action v-if="posts.listItems == 0 || posts.listItems == 2">
+                            <v-list-item-action v-if="posts.menu.listItems == 0 || posts.menu.listItems == 2">
                                 <v-chip
                                     v-if="post.category"
                                     :small="!$vuetify.breakpoint.xs"
                                     :x-small="$vuetify.breakpoint.xs"
-                                    :color="post.color"
+                                    :color="post.category.color"
                                     text-color="white"
                                 >
-                                    {{ post.category }}
+                                    {{ post.category.name }}
                                 </v-chip>
                             </v-list-item-action>
                             </v-list-item>
