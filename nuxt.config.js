@@ -48,7 +48,7 @@ export default {
         // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
-        ['@nuxtjs/moment', ['ja']],
+        ['@nuxtjs/moment', ['ja']]
     ],
     /*
     ** Axios module configuration

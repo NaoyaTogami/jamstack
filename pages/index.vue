@@ -6,7 +6,6 @@
             alt=""
         >
         </v-img>
-        {{ payload }}
         <v-container :style="style">
             <v-row>
                 <template v-for="content in homeContents">
