@@ -58,7 +58,8 @@ export default {
     },
     async asyncData ({ payload, store }) {
         if(payload){
-            store.commit('setMenu', payload)
+            store.commit('setMenu', payload.menu)
+            return {contents: payload.contents}
         }
         else{
             await store.dispatch('getContents')
