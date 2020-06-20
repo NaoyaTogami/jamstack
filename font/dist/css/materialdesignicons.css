@@ -34,6 +34,14 @@
   content: "\F0EB4";
 }
 
+.mdi-menu-down::before {
+  content: "\F035D";
+}
+
+.mdi-arrow-up::before {
+  content: "\F005D";
+}
+
 .mdi-blank::before {
   content: "\F68C";
   visibility: hidden;

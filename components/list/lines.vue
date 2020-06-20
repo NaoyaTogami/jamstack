@@ -16,7 +16,7 @@
                             {{ post.date | format-date }}
                         </v-list-item-subtitle>
                         
-                        <v-list-item-title :class="`${color.post.title.txt}`">{{ post.title }}</v-list-item-title>
+                        <v-list-item-title :class="`${color.post.title.txt}  font-weight-bold`">{{ post.title }}</v-list-item-title>
                         
                         <v-list-item-subtitle v-if="post.overview" :class="`${color.post.txt}`">{{ post.overview }}</v-list-item-subtitle>
                     </v-list-item-content>

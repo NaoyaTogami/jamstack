@@ -72,7 +72,7 @@
             v-show="scroll"
         >
             <v-icon>
-                mdi-chevron-up
+                mdi-arrow-up
             </v-icon>
         </v-btn>
     
@@ -100,19 +100,19 @@
                 <v-row no-gutters class="py-4 justify-center">
                     <v-col
                         cols="auto"
-                        v-for="icon in icons"
-                        :key="icon"
+                        v-for="link in links"
+                        :key="link.icon"
                         class="px-2"
                     >
                         <v-btn
-                            to="/"
+                            :href="link.url"
                             :color="color.footer.bg"
                             :class="`${color.footer.txt}`"
-                            :aria-label="icon"
+                            :aria-label="link.icon"
                             icon
                             large
                         >
-                            <v-icon>{{ icon }}</v-icon>
+                            <v-icon>{{ link.icon }}</v-icon>
                         </v-btn>
                     </v-col>
                 </v-row>
@@ -138,11 +138,11 @@ export default {
                 header: {bg: 'headerBg', txt: 'headerTxt--text'},
                 footer: {bg: 'footerBg', txt: 'footerTxt--text'},
             },
-            icons: [
-                'mdi-twitter',
-                'mdi-youtube',
-                'mdi-instagram'
-            ],
+            links: {
+                twitter: {icon: 'mdi-twitter', url: 'https://twitter.com/togamin22/'},
+                youtube: {icon: 'mdi-youtube', url: 'https://www.youtube.com/channel/UCI1A2DXo2TbpIu5ncxcB6nA/'},
+                instagram: {icon: 'mdi-instagram', url: 'https://www.instagram.com/togamin22/'}
+            },
             scroll: false,
         }
     },

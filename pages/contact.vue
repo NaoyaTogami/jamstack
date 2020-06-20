@@ -35,7 +35,13 @@
                         name="bot-field"
                         v-show="false"
                     />
-                    <v-btn type="submit">送信</v-btn>
+                    <v-btn
+                        type="submit"
+                        color="postTitleBg"
+                        class="postTitleTxt--text"
+                    >
+                        送信
+                    </v-btn>
                 </v-form>
             </v-sheet>
         </v-container>

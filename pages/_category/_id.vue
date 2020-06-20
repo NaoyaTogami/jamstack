@@ -23,22 +23,22 @@ export default {
     components: {
         Post
     },
-    async asyncData ({ payload, store }) {
+    async asyncData ({ app, payload, store, params }) {
         if(payload){
-            var res = {
-                menu: payload.menu,
-                contents: payload.contents
-            }
-            store.commit('setMenu', res.menu)
-            store.commit('setContents', res.contents)
-            return res
+            store.commit('setMenu', payload.menu)
+            return {post: payload.contents}
         }
         else{
-            await store.dispatch('getContents')
-            return {
-                menu: store.state.menu,
-                contents: store.state.contents
-            }
+            let post = await app.$axios.$get(`https://appo.microcms.io/api/v1/content/${params.id}`, {
+                headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
+            })
+            post.content = post.content.map(x => {
+                if(x.type=='i') {
+                    x.content = x.content.slice(13, x.content.length - 10)
+                }
+                return x
+            })
+            return {post: post}
         } 
     },
     data() {
@@ -54,32 +54,6 @@ export default {
         }
     },
     computed: {
-        post () {
-            var routing =  this.contents.map(x => {
-                return x.content.map(y=>{
-                    if (y.params == this.$route.params.category && y.id == this.$route.params.id) {
-                        return y
-                    }
-                })
-                .flat()
-            })
-            .flat()
-            routing =  routing.filter(z => z).flat()
-            return routing[0]
-        },
-        post () {
-            var routing =  this.contents.map(x => {
-                return x.content.map(y=>{
-                    if (y.params == this.$route.params.category && y.id == this.$route.params.id) {
-                        return y
-                    }
-                })
-                .flat()
-            })
-            .flat()
-            routing =  routing.filter(x => x).flat()
-            return routing[0]
-        },
         style () {
             if (this.$vuetify.breakpoint.mdAndUp) {
                 return 'margin-top:64px;'

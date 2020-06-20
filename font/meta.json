@@ -14,5 +14,14 @@
   {
     "name": "youtube",
     "codepoint": "F0EB4"
+  },
+  {
+    "name": "menu-down",
+    "codepoint": "F035D"
+  },
+  {
+    "name": "arrow-up",
+    "codepoint": "F005D"
   }
+  
 ]

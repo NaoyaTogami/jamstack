@@ -91,38 +91,38 @@ export default {
                     headerTxt: '#ffffff',
                     footerBg: colors.blue.darken2,
                     footerTxt: '#ffffff',
-                    tabBg: colors.amber.darken3,
-                    tabTxt: colors.teal.lighten1,
-                    homeBg: colors.amber.base,
-                    homeContentBg: colors.grey.darken3,
-                    homeContentTxt: '#ffffff',
+                    tabBg: '#ffffff',
+                    tabTxt: colors.blue.darken2,
+                    homeBg:  '#ffffff',
+                    homeContentBg: '#ffffff',
+                    homeContentTxt: '#333333',
                     homeContentTitleBg: colors.blue.darken2,
                     homeContentTitleTxt: '#ffffff',
-                    homePostBg: colors.green.accent3,
-                    homePostTxt: colors.teal.lighten1,
+                    homePostBg: '#ffffff',
+                    homePostTxt: '#333333',
                     homePostTitleBg: '#ffffff',
-                    homePostTitleTxt: colors.grey.darken3,
-                    homePostSubTxt: colors.grey.darken3,
-                    homeItemBg: colors.deepOrange.accent4,
-                    homeItemTitleBg: colors.green.accent3,
-                    homeItemTitleTxt: colors.blue.darken2,
-                    listBg: colors.amber.base,
-                    listTitleBg: colors.deepOrange.accent4,
-                    listTitleTxt: colors.blue.darken2,
-                    listPostBg: colors.green.accent3,
-                    listPostTxt: colors.deepOrange.accent4,
-                    listPostTitleBg: colors.grey.darken3,
-                    listPostTitleTxt: colors.amber.darken3,
-                    listPostSubTxt: colors.amber.base,
-                    listItemBg: colors.green.accent3,
-                    listItemTitleBg: colors.blue.darken2,
-                    listItemTitleTxt: colors.grey.darken3,
-                    postBg: colors.amber.darken3,
-                    postTitleBg: colors.teal.lighten1,
-                    postTitleTxt: colors.amber.base,
-                    postItemBg: colors.deepOrange.accent4,
-                    postItemTitleBg: colors.green.accent3,
-                    postItemTitleTxt: colors.blue.darken2,
+                    homePostTitleTxt: '#333333',
+                    homePostSubTxt: '#333333',
+                    homeItemBg: '#ffffff',
+                    homeItemTitleBg: '#f2f2f2',
+                    homeItemTitleTxt: '#333333',
+                    listBg: '#ffffff',
+                    listTitleBg: colors.blue.darken2,
+                    listTitleTxt: '#ffffff',
+                    listPostBg: '#f2f2f2',
+                    listPostTxt: '#333333',
+                    listPostTitleBg: '#f2f2f2',
+                    listPostTitleTxt: '#333333',
+                    listPostSubTxt: '#333333',
+                    listItemBg: '#ffffff',
+                    listItemTitleBg: '#f2f2f2',
+                    listItemTitleTxt: '#333333',
+                    postBg: '#ffffff',
+                    postTitleBg: colors.blue.darken2,
+                    postTitleTxt: '#ffffff',
+                    postItemBg: '#ffffff',
+                    postItemTitleBg: '#f2f2f2',
+                    postItemTitleTxt: '#333333',
                 }
             }
         }
@@ -151,23 +151,17 @@ export default {
                 var content = ''
                 var category = ''
                 var color = ''
+                var tagName = ''
+                var tagParams = ''
                 var filterdPosts = []
                 
                 posts = res.data.contents.map((y, i) => {
                     post = {}
                     items = y.content.map((z, j) => {
-                        content = z.content
-                        if (z.item === 'i') {
-                            content = content.slice(13, content.length - 10)
+                        if (z.type === 'i') {
+                            z.content = z.content.slice(13, z.content.length - 10)
                         }
-                        return {
-                            id: j,
-                            type: z.item,
-                            xs: (z.xs)? z.xs : 12,
-                            sm: (z.sm)? z.sm : 12,
-                            md: (z.md)? z.md : 12,
-                            content: content
-                        }
+                        return z
                     })
                     if(y.category) {
                         category = y.category.name
@@ -177,6 +171,14 @@ export default {
                         category = ''
                         color = ''
                     }
+                    if(y.tag) {
+                        tagName = y.tag.name,
+                        tagParams = y.tag.params
+                    }
+                    else {
+                        tagName = ''
+                        tagParams = ''
+                    }
                     post = {
                         id: y.id,
                         params: y.menu.params,
@@ -184,6 +186,8 @@ export default {
                         title: y.title,
                         overview: y.overview,
                         category: category,
+                        tagName: tagName,
+                        tagParams: tagParams,
                         color: color,
                         content: items
                     }
@@ -212,18 +216,22 @@ export default {
                         sm: (p.sm)? p.sm : 12,
                         md: (p.md)? p.md : 12,
                         tab: p.tab,
+                        original: p.original,
                         content: filterdPosts
                     }
                 })
                 
+                var original = contents.filter(m => m.original)
+                var normal = contents.filter(m => !m.original)
+                
                 var route = []
                 var routing = []
-                route = contents.map(a => {
+                route = normal.map(a => {
                     routing = a.content.map(b=>{
                         return {
                             route: `/${b.params}/${b.id}`,
                             payload: {
-                                contents: contents,
+                                contents: b,
                                 menu: menu
                             }
                         }
