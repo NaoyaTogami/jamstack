@@ -7,7 +7,7 @@
         >
         </v-img>
         <v-container :style="style">
-            {{ payload }}
+
             <v-row>
                 <template v-for="posts in homeContents">
                     <v-col

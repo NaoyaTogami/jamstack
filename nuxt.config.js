@@ -181,7 +181,7 @@ export default {
                     return {
                         route: `/${b.menu.params}/${b.id}`,
                         payload: {
-                            contents: b,
+
                             menu: menu
                         }
                     }
@@ -190,10 +190,8 @@ export default {
                 return [
                     {
                         route: `/${a.menu.params}`,
-                        payload: {
-                            contents: a,
-                            menu: menu
-                        }
+                        payload:menu
+
                     },
                     ...routing
                 ]
@@ -203,17 +201,13 @@ export default {
             route = [
                 {
                     route: '/',
-                    payload: {
-                        contents: contents,
-                        menu: menu
-                    }
+                    payload: menu
+
                 },
                 {
                     route: '/contact',
-                    payload: {
-                        contents: '',
-                        menu: menu
-                    }
+                    payload: menu
+
                 },
                 ...route
             ]
