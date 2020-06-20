@@ -1,6 +1,5 @@
 <template>
     <v-container :style="style">
-        {{ payload }}
         <v-sheet tile :color="color.bg" v-if="posts.menu.layout=='s'">
             <v-row no-gutters>
                 <v-col cols="12">
@@ -56,6 +55,11 @@ export default {
         Tab
     },
     async asyncData ({ app, payload, store, params }) {
+        if(payload){
+            store.commit('setMenu', payload.menu)
+            return {posts: payload.contents}
+        }
+        else{
             var menu = await app.$axios.$get(`https://appo.microcms.io/api/v1/menu?filters=params[equals]${params.category}`, {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
@@ -67,9 +71,9 @@ export default {
                 posts: {
                     menu: menu,
                     content: posts.contents
-                },
-                payload: payload
+                }
             }
+        } 
     },
     data() {
         return {

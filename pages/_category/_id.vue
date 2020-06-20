@@ -1,6 +1,5 @@
 <template>
     <v-container :style="style">
-        {{ payload }}
         <v-sheet tile :color="color.bg">
             <v-row no-gutters>
                 <v-col cols="12">
@@ -25,7 +24,11 @@ export default {
         Post
     },
     async asyncData ({ app, payload, store, params }) {
-
+        if(payload){
+            store.commit('setMenu', payload.menu)
+            return {post: payload.contents}
+        }
+        else{
             let post = await app.$axios.$get(`https://appo.microcms.io/api/v1/content/${params.id}?fields=updatedAt,date,title,content,category,tag`, {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
@@ -35,8 +38,8 @@ export default {
                 }
                 return x
             })
-            return {post: post, payload: payload}
-
+            return {post: post}
+        } 
     },
     data() {
         return {
