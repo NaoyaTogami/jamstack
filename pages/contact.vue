@@ -55,6 +55,7 @@ export default {
         if(payload){
             console.log(payload)
             store.commit('setMenu', payload)
+            return payload
         }
     },
     data() {
