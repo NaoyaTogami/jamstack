@@ -28,18 +28,7 @@ export default {
             store.commit('setMenu', payload.menu)
             return {post: payload.contents}
         }
-        else{
-            let post = await app.$axios.$get(`https://appo.microcms.io/api/v1/content/${params.id}`, {
-                headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
-            })
-            post.content = post.content.map(x => {
-                if(x.type=='i') {
-                    x.content = x.content.slice(13, x.content.length - 10)
-                }
-                return x
-            })
-            return {post: post}
-        } 
+        
     },
     data() {
         return {

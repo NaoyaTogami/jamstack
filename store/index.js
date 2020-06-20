@@ -26,23 +26,17 @@ export const actions = {
         var content = ''
         var category = ''
         var color = ''
+        var tagName = ''
+        var tagParams = ''
         var filterdPosts = []
         
         posts = data.contents.map((y, i) => {
             post = {}
             items = y.content.map((z, j) => {
-                content = z.content
                 if (z.item === 'i') {
-                    content = content.slice(13, content.length - 10)
+                    z.content = z.content.slice(13, z.content.length - 10)
                 }
-                return {
-                    id: j,
-                    type: z.item,
-                    xs: (z.xs)? z.xs : 12,
-                    sm: (z.sm)? z.sm : 12,
-                    md: (z.md)? z.md : 12,
-                    content: content
-                }
+                return z
             })
             if(y.category) {
                 category = y.category.name
@@ -52,6 +46,14 @@ export const actions = {
                 category = ''
                 color = ''
             }
+            if(y.tag) {
+                tagName = y.tag.name,
+                tagParams = y.tag.params
+            }
+            else {
+                tagName = ''
+                tagParams = ''
+            }
             post = {
                 id: y.id,
                 params: y.menu.params,
@@ -59,6 +61,8 @@ export const actions = {
                 title: y.title,
                 overview: y.overview,
                 category: category,
+                tagName: tagName,
+                tagParams: tagParams,
                 color: color,
                 content: items
             }
@@ -89,9 +93,12 @@ export const actions = {
                 sm: (p.sm)? p.sm : 12,
                 md: (p.md)? p.md : 12,
                 tab: p.tab,
+                original: p.original,
                 content: filterdPosts
             }
         })
+        
+        contents = contents.filter(m => !m.original)
 
         commit('setContents', contents)
     }
