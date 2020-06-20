@@ -11,6 +11,7 @@
                         </v-card>
                     </v-col>
                 </v-row>
+                {{ payload }}
                 <v-form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="contact">
                     <v-text-field
