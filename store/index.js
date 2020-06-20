@@ -13,7 +13,7 @@ export const mutations = {
 }
 
 export const actions = {
-    async getApi ({ commit }) {
+    async getContents ({ commit }) {
         var data = await this.$axios.$get('https://appo.microcms.io/api/v1/content', {
             headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
         })

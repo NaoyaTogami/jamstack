@@ -56,8 +56,23 @@ export default {
     components: {
         Change
     },
-    async fetch ({ store, params }) {
-        await store.dispatch('getApi');
+    async asyncData ({ payload, store }) {
+        if(payload){
+            var res = {
+                menu: payload.menu,
+                contents: payload.contents
+            }
+            store.commit('setMenu', res.menu)
+            store.commit('setContents', res.contents)
+            return res
+        }
+        else{
+            await store.dispatch('getContents')
+            return {
+                menu: store.state.menu,
+                contents: store.state.contents
+            }
+        } 
     },
     data() {
         return {

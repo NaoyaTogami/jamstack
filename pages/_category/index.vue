@@ -54,17 +54,18 @@ export default {
         Normal,
         Tab
     },
-    async asyncData ({ payload, store, params }) {
+    async asyncData ({ payload, store }) {
         if(payload){
-            var test = {
+            var res = {
                 menu: payload.menu,
                 contents: payload.contents
             }
-            store.commit('setMenu', test.menu)
-            store.commit('setContents', test.contents)
-            return test
+            store.commit('setMenu', res.menu)
+            store.commit('setContents', res.contents)
+            return res
         }
         else{
+            await store.dispatch('getContents')
             return {
                 menu: store.state.menu,
                 contents: store.state.contents
