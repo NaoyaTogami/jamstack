@@ -1,5 +1,6 @@
 <template>
     <v-container :style="style">
+        {{ payload }}
         <v-sheet tile :color="color.bg" v-if="posts.menu.layout=='s'">
             <v-row no-gutters>
                 <v-col cols="12">
@@ -56,7 +57,6 @@ export default {
     },
     async asyncData ({ app, payload, store, params }) {
         if(payload){
-            console.log(payload)
             store.commit('setMenu', payload.menu)
             return {posts: payload.contents}
         }

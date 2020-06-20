@@ -138,91 +138,87 @@ export default {
         }
     },
     generate: {
-        routes() {
-            return axios.get('https://appo.microcms.io/api/v1/content', {
+        routes: async function () {
+            var res = await axios.get('https://appo.microcms.io/api/v1/content', {
                 headers: { 'X-API-KEY': '773389cb-ee15-43bb-ac24-0b97255ed891' }
             })
-            .then(res=>{
-                var contents = []
-                var menu = []
-                var posts = []
-                var post = {}
-                
-                posts = res.data.contents.map((y, i) => {
-                    y.content = y.content.map(z => {
-                        if (z.type === 'i') {
-                            z.content = z.content.slice(13, z.content.length - 10)
-                        }
-                        return z
-                    })
-                    menu = [...menu, y.menu]
-                    return y
-                })
-                
-                menu = [...new Set(menu)]
-                
-                menu = menu.sort((a, b) => {
-                    return a.order - b.order
-                })
-                
-                contents = menu.map(p => {
-                    return {
-                        menu: p,
-                        content: posts.filter(q => q.menu.params == p.params)
+            var contents = []
+            var menu = []
+            var posts = []
+            var post = {}
+            
+            posts = res.data.contents.map((y, i) => {
+                y.content = y.content.map(z => {
+                    if (z.type === 'i') {
+                        z.content = z.content.slice(13, z.content.length - 10)
                     }
+                    return z
                 })
-                
-                var original = contents.filter(m => m.menu.original)
-                var normal = contents.filter(m => !m.menu.original)
-                
-                var route = []
-                var routing = []
-                route = normal.map(a => {
-                    routing = a.content.map(b=>{
-                        return {
-                            route: `/${b.menu.params}/${b.id}`,
-                            payload: {
-                                contents: b,
-                                menu: menu
-                            }
-                        }
-                    })
-                    .flat()
-                    return [
-                        {
-                            route: `/${a.menu.params}`,
-                            payload: {
-                                contents: a,
-                                menu: menu
-                            }
-                        },
-                        ...routing
-                    ]
-                })
-                .flat()
-                
-                route = [
-                    {
-                        route: '/',
-                        payload: {
-                            contents: contents,
-                            menu: menu
-                        }
-                    },
-                    {
-                        route: '/contact',
-                        payload: {
-                            contents: '',
-                            menu: menu
-                        }
-                    },
-                    ...route
-                ]
-                
-                return route
+                menu = [...menu, y.menu]
+                return y
             })
             
-    
+            menu = [...new Set(menu)]
+            
+            menu = menu.sort((a, b) => {
+                return a.order - b.order
+            })
+            
+            contents = menu.map(p => {
+                return {
+                    menu: p,
+                    content: posts.filter(q => q.menu.params == p.params)
+                }
+            })
+            
+            var original = contents.filter(m => m.menu.original)
+            var normal = contents.filter(m => !m.menu.original)
+            
+            var route = []
+            var routing = []
+            route = normal.map(a => {
+                routing = a.content.map(b=>{
+                    return {
+                        route: `/${b.menu.params}/${b.id}`,
+                        payload: {
+                            contents: b,
+                            menu: menu
+                        }
+                    }
+                })
+                .flat()
+                return [
+                    {
+                        route: `/${a.menu.params}`,
+                        payload: {
+                            contents: a,
+                            menu: menu
+                        }
+                    },
+                    ...routing
+                ]
+            })
+            .flat()
+            
+            route = [
+                {
+                    route: '/',
+                    payload: {
+                        contents: contents,
+                        menu: menu
+                    }
+                },
+                {
+                    route: '/contact',
+                    payload: {
+                        contents: '',
+                        menu: menu
+                    }
+                },
+                ...route
+            ]
+            
+            return route
         }
     }
 }

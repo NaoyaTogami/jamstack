@@ -7,6 +7,7 @@
         >
         </v-img>
         <v-container :style="style">
+            {{ payload }}
             <v-row>
                 <template v-for="posts in homeContents">
                     <v-col
@@ -57,7 +58,6 @@ export default {
     },
     async asyncData ({ payload, store }) {
         if(payload){
-            console.log(payload)
             store.commit('setMenu', payload.menu)
             return {contents: payload.contents}
         }
