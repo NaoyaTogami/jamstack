@@ -53,7 +53,7 @@ export default {
     async asyncData ({ payload, store, params }) {
         if(payload){
             console.log(payload)
-            store.commit('setMenu', payload.menu)
+            store.commit('setMenu', payload)
         }
     },
     data() {

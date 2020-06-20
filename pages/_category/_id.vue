@@ -26,8 +26,7 @@ export default {
     },
     async asyncData ({ app, payload, store, params }) {
         if(payload){
-            store.commit('setMenu', payload.menu)
-            return {post: payload.contents}
+            store.commit('setMenu', payload)
         }
         else{
             let post = await app.$axios.$get(`https://appo.microcms.io/api/v1/content/${params.id}?fields=updatedAt,date,title,content,category,tag`, {

@@ -180,10 +180,8 @@ export default {
                 routing = a.content.map(b=>{
                     return {
                         route: `/${b.menu.params}/${b.id}`,
-                        payload: {
-
-                            menu: menu
-                        }
+                        payload: menu
+                        
                     }
                 })
                 .flat()

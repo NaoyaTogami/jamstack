@@ -57,8 +57,7 @@ export default {
     },
     async asyncData ({ app, payload, store, params }) {
         if(payload){
-            store.commit('setMenu', payload.menu)
-            return {posts: payload.contents}
+            store.commit('setMenu', payload)
         }
         else{
             var menu = await app.$axios.$get(`https://appo.microcms.io/api/v1/menu?filters=params[equals]${params.category}`, {
