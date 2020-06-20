@@ -14,7 +14,12 @@
                     nuxt
                     exact
                 >
-                    <img src="~assets/logo.svg" width="56px" height="56px" alt="">
+                    <v-img
+                        :src="iconImg"
+                        width="56px"
+                        height="56px"
+                        alt=""
+                    ></v-img>
                   
                     <v-toolbar-title
                         :class="`d-none d-md-flex ${color.header.txt}`"
@@ -128,6 +133,7 @@ import { mapGetters } from 'vuex'
 export default {
     data () {
         return {
+            iconImg: require("@/assets/logo.svg"),
             color: {
                 header: {bg: 'headerBg', txt: 'headerTxt--text'},
                 footer: {bg: 'footerBg', txt: 'footerTxt--text'},

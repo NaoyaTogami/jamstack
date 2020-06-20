@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-img
-            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/background.jpg"
+            :src="bgImg"
             height="100vh"
             alt=""
         >
@@ -76,6 +76,7 @@ export default {
     },
     data() {
         return {
+            bgImg: require("@/assets/background.jpg"),
             news: [],
             events: [],
             color: {

@@ -193,6 +193,10 @@ export default {
                 
                 menu = [...new Set(menu)]
                 
+                menu = menu.sort((a, b) => {
+                    return a.order - b.order
+                })
+                
                 contents = menu.map(p => {
                     filterdPosts = posts.filter(q => q.params == p.params)
                     return {

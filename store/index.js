@@ -68,6 +68,10 @@ export const actions = {
         
         menu = [...new Set(menu)]
         
+        menu = menu.sort((a, b) => {
+            return a.order - b.order
+        })
+        
         commit('setMenu', menu)
         
         contents = menu.map(p => {
