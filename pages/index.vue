@@ -6,6 +6,30 @@
             alt=""
         >
         </v-img>
+        <v-img
+            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/76682590_2509308029391796_7960368660730609664_o.jpg"
+            height="100vh"
+            alt=""
+        >
+        </v-img>
+        <v-img
+            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/76682590_2509308029391796_7960368660730609664_o.jpg"
+            height="100vh"
+            alt=""
+        >
+        </v-img>
+        <v-img
+            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/76682590_2509308029391796_7960368660730609664_o.jpg"
+            height="100vh"
+            alt=""
+        >
+        </v-img>
+        <v-img
+            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/76682590_2509308029391796_7960368660730609664_o.jpg"
+            height="100vh"
+            alt=""
+        >
+        </v-img>
         <v-container :style="style">
             <v-row>
                 <template v-for="posts in homeContents">
@@ -42,6 +66,42 @@
                         </v-card>
                     </v-col>
                 </template>
+                <v-col
+                    cols="12"
+                >
+                    <v-card :color="color.content.bg">
+                        <v-sheet tile :color="color.content.title.bg">
+                            <v-card-title
+                                :class="`font-weight-black ${color.content.title.txt}`"
+                            >
+                                サービス
+                            </v-card-title>
+                        </v-sheet>
+                        
+                        <v-divider></v-divider>
+                        
+                        <v-card-actions>
+                            <v-row>
+                                <v-col
+                                    v-for="tag in tags"
+                                    :key="tag.id"
+                                    cols="12"
+                                    sm="6"
+                                    md="4"
+                                >
+                                    <v-btn
+                                        :to="`/service/${tag.params}`"
+                                        class="font-weight-bold"
+                                        block
+                                        nuxt
+                                    >
+                                        {{ tag.name }}
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
             </v-row>
         </v-container>
     </div>
@@ -86,7 +146,15 @@ export default {
                     bg: 'homeItemBg',
                     title: {bg: 'homeItemTitleBg', txt: 'homeItemTitleTxt--text'}
                 }
-            }
+            },
+            tags: [
+                {id: 0, name: 'オリエンテーリング関係者向け', params: 'orienteer'},
+                {id: 1, name: 'イベント主催者向け', params: 'organizer'},
+                {id: 2, name: '企業向け', params: 'company'},
+                {id: 3, name: '行政向け', params: 'gov'},
+                {id: 4, name: '教育機関向け', params: 'education'}
+                
+            ]
         }
     },
     computed: {

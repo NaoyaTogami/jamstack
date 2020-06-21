@@ -158,7 +158,7 @@ export default {
                     return y
                 })
                 
-                menu = [...new Set(menu)]
+                menu = [...new Map(menu.map(x => [x.id, x])).values()]
                 
                 menu = menu.sort((a, b) => {
                     return a.order - b.order
