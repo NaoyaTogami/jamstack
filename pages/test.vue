@@ -32,10 +32,13 @@
         
         <v-menu
             v-if="$vuetify.breakpoint.xs"
+            right
+            nudge-right
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               :color="layout.header.txtColor"
+              aria-label="menu"
               v-bind="attrs"
               v-on="on"
               icon
@@ -71,7 +74,7 @@
     </v-app-bar>
     <v-content v-scroll="onScroll">
         <template v-for="(content, i) in contents">
-            <div :id="(content.menu)? `menu${i}` : `undefined`"></div>
+            <div v-if="content.menu" :id="`menu${i}`"></div>
             <v-img
                 :src="(content.contents[0].bgPic)? content.contents[0].bgPic.url : undefined"
                 :height="(content.contents[0].type=='トップ')? '100vh' : undefined"
@@ -193,6 +196,7 @@
                                         style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);-webkit-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);"
                                         width="100%"
                                         height="100%"
+                                        title="Movie"
                                         :src="`https://www.youtube.com/embed/${content.contents[0].movie}`"
                                         frameborder="0"
                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
