@@ -6,30 +6,6 @@
             alt=""
         >
         </v-img>
-        <v-img
-            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/76682590_2509308029391796_7960368660730609664_o.jpg"
-            height="100vh"
-            alt=""
-        >
-        </v-img>
-        <v-img
-            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/Fotor_159117634104092%20(1)-min.jpg"
-            height="100vh"
-            alt=""
-        >
-        </v-img>
-        <v-img
-            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/Fotor_159131660193928%20(1)-min.jpg"
-            height="100vh"
-            alt=""
-        >
-        </v-img>
-        <v-img
-            src="https://images.microcms-assets.io/protected/ap-northeast-1:6a6c77df-2a2c-483f-a92c-0a629af9314b/service/appo/media/IMG_20200607_122202%20(1)-min.jpg"
-            height="100vh"
-            alt=""
-        >
-        </v-img>
         <v-container :style="style">
             <v-row>
                 <template v-for="posts in homeContents">

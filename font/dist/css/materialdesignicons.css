@@ -42,6 +42,18 @@
   content: "\F005D";
 }
 
+.mdi-menu::before {
+  content: "\F035C";
+}
+
+.mdi-chevron-left::before {
+  content: "\F0141";
+}
+
+.mdi-chevron-right::before {
+  content: "\F0142";
+}
+
 .mdi-blank::before {
   content: "\F68C";
   visibility: hidden;
