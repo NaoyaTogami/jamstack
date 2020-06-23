@@ -184,7 +184,7 @@
                                     <v-carousel-item
                                         v-for="(pic,i) in content.contents[0].pics"
                                         :key="i"
-                                        :src="pic.pic.url"
+                                        :src="(pic.pic)? pic.pic.url : undefined"
                                     ></v-carousel-item>
                                 </v-carousel>
                             </v-col>
